@@ -25,7 +25,7 @@ const Header: React.FC = () => {
     <>
       <MDBNavbar expand="md" light bgColor="light">
         <MDBContainer className="d-flex align-items-center justify-content-between">
-          <div>
+          <>
             <MDBNavbarToggler
               aria-controls="navbarSupportedContent"
               aria-expanded="false"
@@ -34,7 +34,7 @@ const Header: React.FC = () => {
             >
               <MDBIcon icon="bars" fas />
             </MDBNavbarToggler>
-          </div>
+          </>
 
           <div>
             <MDBNavbarBrand href="#" className="collapse navbar-collapse m">
