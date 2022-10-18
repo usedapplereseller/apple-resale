@@ -16,10 +16,12 @@ import {
   MDBCollapse,
   MDBBadge,
 } from "mdb-react-ui-kit";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Header: React.FC = () => {
   const [showBasic, setShowBasic] = useState(false);
   const productHeaders = ["Mac", "iPad", "iPhone", "Watch", "Airpods"];
+  const { loginWithRedirect } = useAuth0();
 
   return (
     <>
@@ -88,7 +90,10 @@ const Header: React.FC = () => {
                   </MDBContainer>
                 </MDBDropdownItem>
                 <MDBDropdownItem link>
-                  <MDBContainer className="d-flex justify-content-start align-items-center">
+                  <MDBContainer
+                    onClick={() => loginWithRedirect()}
+                    className="d-flex justify-content-start align-items-center"
+                  >
                     <MDBIcon fas icon="sign-out-alt" className="me-2" />
                     <div>Log out</div>
                   </MDBContainer>
