@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import App from "./components/App";
 import Home from "./components/Home";
+import { Auth0Provider } from "@auth0/auth0-react";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
@@ -11,21 +12,27 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        {/* Route that provides base app UI */}
-        <Route path="/" element={<App />}>
-          {/* Route that renders home content */}
-          <Route index element={<Home />} />
-          {/* Route that renders new listing form
+    <Auth0Provider
+      domain={process.env.REACT_APP_DOMAIN!}
+      clientId={process.env.REACT_APP_CLIENTID!}
+      redirectUri={window.location.origin}
+    >
+      <BrowserRouter>
+        <Routes>
+          {/* Route that provides base app UI */}
+          <Route path="/" element={<App />}>
+            {/* Route that renders home content */}
+            <Route index element={<Home />} />
+            {/* Route that renders new listing form
           <Route path="listings/new" element={<NewListingForm />} /> */}
-          {/* Route that renders individual listings */}
-          {/* <Route path="listings/:listingId" element={<Listing />} /> */}
-          {/* Route that matches all other paths */}
-          <Route path="*" element={"Nothing here!"} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+            {/* Route that renders individual listings */}
+            {/* <Route path="listings/:listingId" element={<Listing />} /> */}
+            {/* Route that matches all other paths */}
+            <Route path="*" element={"Nothing here!"} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </Auth0Provider>
   </React.StrictMode>
 );
 
@@ -33,3 +40,5 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+console.log(window.location.origin);

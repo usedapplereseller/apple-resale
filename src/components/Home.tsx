@@ -1,15 +1,16 @@
-import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import React, { FC } from "react";
 import Header from "./common/Header";
 import SearchBar from "./common/SearchBar";
 import ListingPreviewList from "./common/ListingPreviewList";
-
 import "./App.css";
 import iphoneImg from "../landing-page-images/iphone.jpeg";
 import watchImg from "../landing-page-images/watch.png";
 import ipadImg from "../landing-page-images/ipad.png";
 import macImg from "../landing-page-images/mac.png";
 
-const Home: React.FC = () => {
+const Home: FC = () => {
+  const { loginWithRedirect } = useAuth0();
   return (
     <div>
       <Header />
@@ -54,6 +55,8 @@ const Home: React.FC = () => {
 
       {/* to update for Recommendations, View History, and Similar Listings */}
       <ListingPreviewList />
+      <br />
+      <button onClick={() => loginWithRedirect()}>Logout</button>
     </div>
   );
 };
