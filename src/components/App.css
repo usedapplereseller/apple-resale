@@ -28,6 +28,33 @@
   color: #61dafb;
 }
 
+.listingCard {
+  max-height: 46vh;
+  min-height: 37vh;
+  max-width: 25vh;
+  min-width: 25vh;
+}
+
+.listingCardPhoto {
+  min-height: 20vh;
+  max-height: 20vh;
+}
+
+.categoryPhoto {
+  min-height: 20vh;
+  max-height: 40vh;
+  min-width: 40vh;
+  max-width: 80vh;
+}
+
+.categoryContainer {
+  min-height: 20vh;
+  max-height: 40vh;
+  min-width: 40vh;
+  max-width: 80vh;
+  margin: 0.5rem;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
