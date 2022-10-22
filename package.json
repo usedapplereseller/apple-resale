@@ -14,6 +14,7 @@
     "@types/node": "^16.11.64",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "auth0": "^2.44.0",
     "axios": "^1.1.2",
     "mdb-react-ui-kit": "^4.2.0",
     "react": "^18.2.0",
