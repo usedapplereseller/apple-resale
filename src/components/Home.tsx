@@ -53,6 +53,7 @@ const Home: FC = () => {
 
       {/* to update for Recommendations, View History, and Similar Listings */}
       <ListingPreviewList />
+      <br />
     </div>
   );
 };

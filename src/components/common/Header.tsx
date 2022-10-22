@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   MDBContainer,
   MDBNavbar,
@@ -21,7 +21,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 const Header: React.FC = () => {
   const [showBasic, setShowBasic] = useState(false);
   const productHeaders = ["Mac", "iPad", "iPhone", "Watch", "Airpods"];
-  const { loginWithRedirect } = useAuth0();
+  const { loginWithRedirect, isAuthenticated, logout } = useAuth0();
 
   return (
     <>
@@ -60,53 +60,62 @@ const Header: React.FC = () => {
           </div>
 
           <div className="d-inline-flex align-items-center">
-            <MDBDropdown>
-              <MDBDropdownToggle tag="a" className="nav-link">
-                <MDBIcon fas icon="user" />
-              </MDBDropdownToggle>
-              <MDBDropdownMenu>
-                <MDBDropdownItem link>
-                  <MDBContainer className="d-flex justify-content-start align-items-center">
-                    <MDBIcon far icon="user-circle" className="me-2" />
-                    <div>Profile</div>
-                  </MDBContainer>
-                </MDBDropdownItem>
-                <MDBDropdownItem link>
-                  <MDBContainer className="d-flex justify-content-start align-items-center">
-                    <MDBIcon fas icon="cog" className="me-2" />
-                    <div>Settings</div>
-                  </MDBContainer>
-                </MDBDropdownItem>
-                <MDBDropdownItem link>
-                  <MDBContainer className="d-flex justify-content-start align-items-center">
-                    <MDBIcon fas icon="shopping-bag" className="me-2" />
-                    <div>My purchases</div>
-                  </MDBContainer>
-                </MDBDropdownItem>
-                <MDBDropdownItem link>
-                  <MDBContainer className="d-flex justify-content-start align-items-center">
-                    <MDBIcon fas icon="align-left" className="me-2" />
-                    <div>My sales</div>
-                  </MDBContainer>
-                </MDBDropdownItem>
-                <MDBDropdownItem link>
-                  <MDBContainer
-                    onClick={() => loginWithRedirect()}
-                    className="d-flex justify-content-start align-items-center"
-                  >
-                    <MDBIcon fas icon="sign-out-alt" className="me-2" />
-                    <div>Log out</div>
-                  </MDBContainer>
-                </MDBDropdownItem>
-              </MDBDropdownMenu>
-            </MDBDropdown>
-            <a className="me-4" href="#!">
-              <MDBIcon far icon="comment" size="lg" />
-              <MDBBadge color="danger" notification pill>
-                1
-              </MDBBadge>
-            </a>
-            <MDBBtn className="d-flex justify-content-center">Sell</MDBBtn>
+            {isAuthenticated && (
+              <>
+                <MDBDropdown>
+                  <MDBDropdownToggle tag="a" className="nav-link">
+                    <MDBIcon fas icon="user" />
+                  </MDBDropdownToggle>
+                  <MDBDropdownMenu>
+                    <MDBDropdownItem link>
+                      <MDBContainer className="d-flex justify-content-start align-items-center">
+                        <MDBIcon far icon="user-circle" className="me-2" />
+                        <div>Profile</div>
+                      </MDBContainer>
+                    </MDBDropdownItem>
+                    <MDBDropdownItem link>
+                      <MDBContainer className="d-flex justify-content-start align-items-center">
+                        <MDBIcon fas icon="cog" className="me-2" />
+                        <div>Settings</div>
+                      </MDBContainer>
+                    </MDBDropdownItem>
+                    <MDBDropdownItem link>
+                      <MDBContainer className="d-flex justify-content-start align-items-center">
+                        <MDBIcon fas icon="shopping-bag" className="me-2" />
+                        <div>My purchases</div>
+                      </MDBContainer>
+                    </MDBDropdownItem>
+                    <MDBDropdownItem link>
+                      <MDBContainer className="d-flex justify-content-start align-items-center">
+                        <MDBIcon fas icon="align-left" className="me-2" />
+                        <div>My sales</div>
+                      </MDBContainer>
+                    </MDBDropdownItem>
+                    <MDBDropdownItem link>
+                      <MDBContainer
+                        className="d-flex justify-content-start align-items-center"
+                        onClick={() => logout()}
+                      >
+                        <MDBIcon fas icon="sign-out-alt" className="me-2" />
+                        <div>Log out</div>
+                      </MDBContainer>
+                    </MDBDropdownItem>
+                  </MDBDropdownMenu>
+                </MDBDropdown>
+                <a className="me-4" href="#!">
+                  <MDBIcon far icon="comment" size="lg" />
+                  <MDBBadge color="danger" notification pill>
+                    1
+                  </MDBBadge>
+                </a>
+              </>
+            )}
+            <MDBBtn
+              className="d-flex justify-content-center"
+              onClick={() => loginWithRedirect()}
+            >
+              Sell
+            </MDBBtn>
           </div>
         </MDBContainer>
       </MDBNavbar>
