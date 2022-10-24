@@ -6,6 +6,7 @@ import App from "./components/App";
 import Home from "./components/Home";
 import { Auth0Provider } from "@auth0/auth0-react";
 import reportWebVitals from "./reportWebVitals";
+import ListingProducts from "./components/ListingProducts";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -28,6 +29,7 @@ root.render(
             {/* Route that renders individual listings */}
             {/* <Route path="listings/:listingId" element={<Listing />} /> */}
             {/* Route that matches all other paths */}
+            <Route path="listings/:productId" element={<ListingProducts />} />
             <Route path="*" element={"Nothing here!"} />
           </Route>
         </Routes>
