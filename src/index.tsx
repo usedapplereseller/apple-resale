@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import { Auth0Provider } from "@auth0/auth0-react";
 import reportWebVitals from "./reportWebVitals";
 import ListingProducts from "./components/ListingProducts";
+import NewListingForm from "./components/NewListingForm";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -24,8 +25,8 @@ root.render(
           <Route path="/" element={<App />}>
             {/* Route that renders home content */}
             <Route index element={<Home />} />
-            {/* Route that renders new listing form
-          <Route path="listings/new" element={<NewListingForm />} /> */}
+            {/* Route that renders new listing form */}
+            <Route path="listings/new" element={<NewListingForm />} />
             {/* Route that renders individual listings */}
             {/* <Route path="listings/:listingId" element={<Listing />} /> */}
             {/* Route that matches all other paths */}
