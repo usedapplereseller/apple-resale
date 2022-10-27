@@ -18,6 +18,8 @@ root.render(
       domain={process.env.REACT_APP_DOMAIN!}
       clientId={process.env.REACT_APP_CLIENTID!}
       redirectUri={window.location.origin}
+      audience={process.env.REACT_APP_AUDIENCE}
+      scope={process.env.REACT_APP_SCOPE}
     >
       <BrowserRouter>
         <Routes>

@@ -84,14 +84,16 @@ const NewListingForm: FC = () => {
     // send post request from frontend to backend
     const sendRequest = async () => {
       const response = await axios.post(
-        `${BACKEND_URL}/listings/new`,
+        `${BACKEND_URL}/listings`,
         {
           title: listingTitle,
           price: price,
           description: description,
-          product_id: productType,
-          condition_id: condition,
-          seller_email: user?.email,
+          selectedProductId: productType,
+          selectedConditionId: condition,
+          sellerEmail: user?.email,
+          sellerFirstName: user?.given_name,
+          sellerLastName: user?.family_name,
         },
         {
           headers: {
