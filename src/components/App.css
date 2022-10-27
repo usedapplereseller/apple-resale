@@ -47,6 +47,12 @@
   max-width: 80vh;
 }
 
+.categoryPhotoListingBuy {
+  height: 200px;
+  width: 200px;
+  margin: 5px;
+}
+
 .categoryContainer {
   min-height: 20vh;
   max-height: 40vh;

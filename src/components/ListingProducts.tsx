@@ -1,24 +1,24 @@
 import React, { FC, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Header from "./common/Header";
-import SearchBar from "./common/SearchBar";
 import ListingPreview2 from "./common/ListingPreview2";
 import "./App.css";
 import { MDBContainer, MDBTypography, MDBBtn } from "mdb-react-ui-kit";
 import axios from "axios";
-import { BACKEND_URL } from "../constants";
+import { BACKEND_URL, TYPE_OF_PRODUCT } from "../constants";
 
 const ListingProducts: FC = () => {
   const [productId, setProductId] = useState<string>();
   const [listings, setListings] = useState<any[]>();
+  const [productName, setProductName] = useState<string>();
 
   useEffect(() => {
     if (productId) {
       axios.get(`${BACKEND_URL}/listings/${productId}`).then((response) => {
         setListings(response.data);
       });
+      setProductName(TYPE_OF_PRODUCT[productId]);
     }
-    console.log(listings);
   }, [productId]);
 
   const params = useParams();
@@ -32,7 +32,7 @@ const ListingProducts: FC = () => {
       {/* to create breadcrumbs */}
       <MDBContainer>
         <MDBTypography tag="h6" className="mt-4">
-          ~ Recommendations ~{" "}
+          {productName}
         </MDBTypography>
         <MDBContainer className="d-flex flex-wrap justify-content-center">
           {listings?.map((listing) => (
