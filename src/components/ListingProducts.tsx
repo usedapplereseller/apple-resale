@@ -6,11 +6,14 @@ import "./App.css";
 import { MDBContainer, MDBTypography, MDBBtn } from "mdb-react-ui-kit";
 import axios from "axios";
 import { BACKEND_URL, TYPE_OF_PRODUCT } from "../constants";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import { styled } from "@material-ui/styles";
 
 const ListingProducts: FC = () => {
   const [productId, setProductId] = useState<string>();
   const [listings, setListings] = useState<any[]>();
   const [productName, setProductName] = useState<string>();
+  const [urlProduct, setUrlProduct] = useState<string>("");
 
   useEffect(() => {
     if (productId) {
@@ -18,6 +21,7 @@ const ListingProducts: FC = () => {
         setListings(response.data);
       });
       setProductName(TYPE_OF_PRODUCT[productId]);
+      setUrlProduct(`/listings/${productId}`);
     }
   }, [productId]);
 
@@ -26,10 +30,18 @@ const ListingProducts: FC = () => {
     setProductId(params.productId);
   }
 
+  const StyledLink = styled(Link)({
+    underline: "hover",
+    color: "inherit",
+  }) as typeof Link;
+
   return (
     <div>
       <Header />
-      {/* to create breadcrumbs */}
+      <Breadcrumbs aria-label="breadcrumb">
+        <StyledLink to="/">Home</StyledLink>
+        <StyledLink to={urlProduct}>{productName}</StyledLink>
+      </Breadcrumbs>
       <MDBContainer>
         <MDBTypography tag="h6" className="mt-4">
           {productName}

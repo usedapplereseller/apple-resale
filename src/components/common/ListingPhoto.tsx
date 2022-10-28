@@ -8,7 +8,7 @@ type Props = {
 const ListingPhoto: React.FC<Props> = ({ photoUrl }) => {
   return (
     <div className="bg-image">
-      <img src={photoUrl} className="img-fluid  categoryPhotoListingBuy" />
+      <img src={photoUrl} className="categoryPhotoListingBuy" />
     </div>
   );
 };

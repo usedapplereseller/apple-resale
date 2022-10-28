@@ -1,17 +1,18 @@
 import React, { FC, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Header from "./common/Header";
 import ListingPhoto from "./common/ListingPhoto";
 import "./App.css";
 import { MDBContainer, MDBTypography, MDBBtn } from "mdb-react-ui-kit";
 import axios from "axios";
-import { BACKEND_URL } from "../constants";
+import { BACKEND_URL, TYPE_OF_PRODUCT } from "../constants";
 import iphoneImg from "../landing-page-images/iphone.jpeg";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import { styled } from "@material-ui/styles";
 
 import ListingPreviewList from "./common/ListingPreviewList";
 
@@ -20,6 +21,7 @@ const ListingBuy: FC = () => {
   const [listingId, setListingId] = useState<string>();
   const [title, setTitle] = useState<string>();
   const [price, setPrice] = useState<number>();
+  const [productName, setProductName] = useState<string>();
   const [description, setDescription] = useState<string>();
   const [condition, setCondition] = useState<string>();
   const [sellerId, setSellerId] = useState<number>();
@@ -29,6 +31,7 @@ const ListingBuy: FC = () => {
     iphoneImg,
     iphoneImg,
   ]);
+  const [urlProduct, setUrlProduct] = useState<string>("");
 
   useEffect(() => {
     if (productId && listingId) {
@@ -41,6 +44,8 @@ const ListingBuy: FC = () => {
           setCondition(response.data.condition_id);
           setSellerId(response.data.seller_id);
           setBuyerId(response.data.buyer_id);
+          setProductName(TYPE_OF_PRODUCT[productId]);
+          setUrlProduct(`/listings/${productId}`);
         });
     }
   }, [listingId, productId]);
@@ -64,6 +69,11 @@ const ListingBuy: FC = () => {
     setProductId(params.productId);
   }
 
+  function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    event.preventDefault();
+    console.info("You clicked a breadcrumb.");
+  }
+
   const cardBasicInfo = (
     <React.Fragment>
       <CardContent>
@@ -73,8 +83,9 @@ const ListingBuy: FC = () => {
         <Typography variant="h5" component="div">
           ${price}
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {condition}
+        <Typography color="text.secondary">
+          {/* {condition}*/}
+          Like new
         </Typography>
       </CardContent>
     </React.Fragment>
@@ -94,7 +105,7 @@ const ListingBuy: FC = () => {
   const cardInteraction = (
     <React.Fragment>
       <CardContent>
-        <Typography variant="body2">Seller</Typography>
+        <Typography variant="body2">Seller: {sellerId}</Typography>
         <MDBBtn
           className="mt-3 btn-sm"
           style={{ maxWidth: 100 }}
@@ -117,11 +128,22 @@ const ListingBuy: FC = () => {
     </React.Fragment>
   );
 
+  const StyledLink = styled(Link)({
+    underline: "hover",
+    color: "inherit",
+  }) as typeof Link;
+
   return (
     <div>
       <Header />
-      {/* to create breadcrumbs */}
-      <MDBContainer>
+      <div role="presentation" onClick={handleClick}>
+        <Breadcrumbs aria-label="breadcrumb">
+          <StyledLink to="/">Home</StyledLink>
+          <StyledLink to={urlProduct}>{productName}</StyledLink>
+          <Typography color="text.primary">{title}</Typography>
+        </Breadcrumbs>
+      </div>
+      <MDBContainer sx={{ padding: 0 }}>
         <MDBTypography tag="h6" className="mt-4">
           {/* To add breadcrumb */}
         </MDBTypography>
@@ -136,16 +158,19 @@ const ListingBuy: FC = () => {
           ))}
         </MDBContainer>
         <MDBContainer className="d-flex flex-wrap justify-content-center">
-          <div>
-            <Box sx={{ Width: 0.75, Margin: 5 }}>
+          <div className="product-info text-left">
+            <Box sx={{ Margin: 5 }}>
               <Card variant="outlined">{cardBasicInfo}</Card>
             </Box>
-            <Box sx={{ Width: 0.75, Margin: 5 }}>
+            <Box sx={{ Margin: 5 }}>
               <Card variant="outlined">{cardDescription}</Card>
             </Box>
           </div>
-          <Box sx={{ Width: 0.2, Margin: 5 }}>
-            <Card variant="outlined">{cardInteraction}</Card>
+
+          <Box sx={{ Margin: 5, width: 200, height: "100%" }}>
+            <div className="listing-options">
+              <Card variant="outlined">{cardInteraction}</Card>
+            </div>
           </Box>
         </MDBContainer>
         <br />
