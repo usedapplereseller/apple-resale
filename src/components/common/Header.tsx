@@ -17,11 +17,13 @@ import {
   MDBBadge,
 } from "mdb-react-ui-kit";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from "react-router-dom";
 
 const Header: React.FC = () => {
   const [showBasic, setShowBasic] = useState(false);
   const productHeaders = ["Mac", "iPad", "iPhone", "Watch", "Airpods"];
   const { loginWithRedirect, isAuthenticated, logout } = useAuth0();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -112,7 +114,8 @@ const Header: React.FC = () => {
             )}
             <MDBBtn
               className="d-flex justify-content-center"
-              onClick={() => loginWithRedirect()}
+              // onClick={() => loginWithRedirect()}
+              onClick={() => navigate("/listings/new")}
             >
               Sell
             </MDBBtn>
