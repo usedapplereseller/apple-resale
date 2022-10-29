@@ -47,12 +47,31 @@
   max-width: 80vh;
 }
 
+.categoryPhotoListingBuy {
+  height: 200px;
+  width: 200px;
+  margin: 5px;
+  object-fit: cover;
+}
+
 .categoryContainer {
   min-height: 20vh;
   max-height: 40vh;
   min-width: 40vh;
   max-width: 80vh;
   margin: 0.5rem;
+}
+
+.product-info {
+  width: 500px;
+}
+
+.listing-options {
+  width: 200px;
+}
+
+.text-left {
+  text-align: left;
 }
 
 @keyframes App-logo-spin {

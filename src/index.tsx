@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import { Auth0Provider } from "@auth0/auth0-react";
 import reportWebVitals from "./reportWebVitals";
 import ListingProducts from "./components/ListingProducts";
+import ListingBuy from "./components/ListingBuy";
 import NewListingForm from "./components/NewListingForm";
 
 const root = ReactDOM.createRoot(
@@ -33,6 +34,10 @@ root.render(
             {/* <Route path="listings/:listingId" element={<Listing />} /> */}
             {/* Route that matches all other paths */}
             <Route path="listings/:productId" element={<ListingProducts />} />
+            <Route
+              path="listings/:productId/:listingId"
+              element={<ListingBuy />}
+            />
             <Route path="*" element={"Nothing here!"} />
           </Route>
         </Routes>

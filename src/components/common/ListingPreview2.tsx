@@ -1,3 +1,5 @@
+// to merge with ListingPreview.tsx
+
 import React from "react";
 import { MDBCard, MDBCardText, MDBContainer, MDBIcon } from "mdb-react-ui-kit";
 import { Avatar, Box } from "@mui/material";
